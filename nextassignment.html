@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturing and Displaying Form Data using DOM Manipulation</title>
+</head>
+<body>
+    <input type="text" id="input1">
+    <button onclick="submit()">Submit</button>
+   <h1 id="tag1"></h1>
+</body>
+</html>
+<script>
+let inputtext = document.getElementById("input1")
+let h1tag = document.getElementById("tag1")
+function submit(){
+    h1tag.innerText = "Entered value : "+ inputtext.value
+}
+</script>
