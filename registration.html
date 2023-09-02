@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration</title>
+</head>
+<body>
+	<input type="text" name="name" id="name">
+	<select id="gender">
+		<option value="">--</option>
+		<option value="male">M</option>
+		<option value="female">F</option>
+	</select>
+	<input type="text" name="email" id="email">
+	<input type="text" name="mobile" id="mobile">
+	<hr>
+	<h1 id="dName">NAME</h1>
+	<h2 id="dGender">GENDER</h2>
+	<h3 id="dEmail">EMAIL</h3>
+	<h4 id="dMobile">MOBILE</h4>
+	<hr>
+	<button onclick="showName()">NAME</button>
+	<button onclick="showGender()">GENDER</button>
+	<button onclick="showEmail()">EMAIL</button>
+	<button onclick="showMobile()">MOBILE</button>
+	<button onclick="resetForm()">RESET FORM</button>
+	<button onclick="resetDisplay()">RESET DISPLAY</button>
+	<script type="text/javascript">
+        let namet = document.getElementById("name")
+		let h1tag = document.getElementById("dName")
+		let gendert = document.getElementById("gender")
+		let h2tag = document.getElementById("dGender")
+		let h3tag = document.getElementById("dEmail")
+		let emailt = document.getElementById("email")
+		let h4tag = document.getElementById("dMobile")
+		let mobilet = document.getElementById("mobile")
+		function showName() {
+		h1tag.innerText = namet.value
+		}
+
+		function showGender() {
+			h2tag.innerText = gendert.value
+		}
+
+		function showEmail() {
+			// Show the filled email inside h3
+          h3tag.innerText= emailt.value
+		}
+
+		function showMobile() {
+			// Show the filled mobile inside h4
+			h4tag.innerText = mobilet.value
+		}
+
+		function resetForm() 
+			 {
+  namet.value = "";
+  gendert.selectedIndex = 0;
+  emailt.value = "";
+  mobilet.value = "";
+}
+
+
+		
+
+		function resetDisplay() {
+			// Reset all the headings (h1, h2, h3, h4) to blank values
+			
+  document.getElementById("dName").textContent = "";
+  document.getElementById("dGender").textContent = "";
+  document.getElementById("dEmail").textContent = "";
+  document.getElementById("dMobile").textContent = "";
+}
+
+		
+	</script>
+</body>
+</html>
