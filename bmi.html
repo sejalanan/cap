@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><b>Check your BMI</b></h1>
+    <h2>Enter your weight and height below to check your BMI results</h2>
+    <h2>Put your weight in here (KG)</h2>
+    <input id="input1" type="number">
+    <h2>And your height in here (CM)</h2>
+    <input id="input2" type="number">
+    <button onclick="cal()">Calculate BMI</button>
+    <h2 id="ans">your bmi is</h2>
+</body>
+<script>
+    function cal(){
+let input1t = document.getElementById("input1")
+let input2t = document.getElementById("input2")
+let h2tag = document.getElementById("ans")
+let weight = parseFloat(input1t.value);
+        let height = parseFloat(input2t.value);
+
+        let BMIscore = weight / (height * height);
+    // let BMIscore = (input1t.value/(input2t.value*input2t.value))
+    if (BMIscore <= 18.4){
+    h2tag.innerText =" Your BMI is " + BMIscore.toFixed(2) + "which means you are Underweight"
+}
+else if(BMIscore >= 18.5 && BMIscore <= 24.9){
+    h2tag.innerText =" Your BMI is " + BMIscore.toFixed(2)  + "which means you are Normal weight"
+}
+else if(BMIscore >= 25 && BMIscore <= 29.9){
+    h2tag.innerText =" Your  BMI is "+ BMIscore.toFixed(2)  +"which means you are Over weight"
+}
+else if(BMIscore >= 30){
+    h2tag.innerText =" Your BMI is " + BMIscore.toFixed(2)  + "which means you are Obese"
+}}
+
+
+</script>
+</html>
