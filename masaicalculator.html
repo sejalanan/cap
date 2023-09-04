@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .parent {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .const, .operator, #eq {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+    </style> <title>Document</title>
+  </head>
+  <body>
+    <div class="parent" >
+    <div>
+      <h1 id="display"></h1>
+    </div>
+    <div class="const">
+      <button>0</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+    </div>
+    <div class="operator">
+      <button>+</button>
+      <button>-</button>
+      <button>*</button>
+      <button>/</button>
+    </div>
+    <div id="eq">
+      <button>=</button>
+    </div>
+</div>
+  </body>
+  <script>
+    let keyboard = document.querySelectorAll(".const > button");
+    let func = document.querySelectorAll(".operator > button");
+    let heading = document.getElementById("display");
+    let equal = document.getElementById("eq");
+    let firstnumber = "";
+    let secondnumber = "";
+    let isfirstnumber = true;
+    let operators = "";
+    for (let i = 0; i < keyboard.length; i++) {
+      keyboard[i].addEventListener("click", function () {
+        if (isfirstnumber == true) {
+          firstnumber += keyboard[i].innerText;
+          heading.innerText = firstnumber;
+        } else {
+          secondnumber += keyboard[i].innerText;
+          heading.innerText = secondnumber;
+        }
+      });
+    }
+    for (let i = 0; i < func.length; i++) {
+      func[i].addEventListener("click", function () {
+        isfirstnumber = false;
+        operators = func[i].innerText;
+      });
+    }
+    equal.addEventListener("click", function () {
+      heading.innerText = calculate(firstnumber, secondnumber, operators);
+    });
+    function calculate(firstnumber, secondnumber, operators) {
+      switch (operators) {
+        case "+":
+          return Number(firstnumber) + Number(secondnumber);
+        case "-":
+          return Number(firstnumber) - Number(secondnumber);
+        case "/":
+          return Number(firstnumber) / Number(secondnumber);
+        case "*":
+          return Number(firstnumber) * Number(secondnumber);
+      }
+    }
+  </script>
+</html>
