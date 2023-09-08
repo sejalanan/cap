@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    
+        #min, #max {
+            font-size: 24px;
+            margin: 10px;
+        }
+    
+        #input {
+            font-size: 18px;
+            padding: 5px;
+            margin: 10px;
+        }
+    
+        .const {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 10px;
+        }
+    
+        .num-button {
+            font-size: 24px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+    
+        .num-button:hover {
+            background-color: #e0e0e0;
+        }
+    
+        #ente {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    
+        #ente:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <div id="min">45</div>
+    <div id="max">1023</div>
+    
+    <input id="input" type="number" placeholder="Score">
+    <div class="const">
+        <button class="num-button">0</button>
+        <button class="num-button">1</button>
+        <button class="num-button">2</button>
+        <button class="num-button">3</button>
+        <button class="num-button">4</button>
+        <button class="num-button">5</button>
+        <button class="num-button">6</button>
+        <button class="num-button">7</button>
+        <button class="num-button">8</button>
+        <button class="num-button">9</button>
+    </div>
+    <button id="ente">Enter</button>
+
+    <script>
+        let numButtons = document.querySelectorAll(".num-button");
+        let enter = document.getElementById("ente");
+        let minElement = document.getElementById("min");
+        let maxElement = document.getElementById("max");
+        let input = document.getElementById("input");
+        let firstnumber = "";
+
+        for (let i = 0; i < numButtons.length; i++) {
+            numButtons[i].addEventListener("click", function () {
+                firstnumber += numButtons[i].innerText;
+                input.value = firstnumber;
+            });
+        }
+
+        enter.addEventListener("click", function () {
+            if (input.value !== "") {
+                const inputValue = parseInt(input.value);
+                const currentMin = parseInt(minElement.innerText);
+                const currentMax = parseInt(maxElement.innerText);
+
+                if (inputValue > currentMax) {
+                    maxElement.innerText = inputValue;
+                } else if (inputValue < currentMin) {
+                    minElement.innerText = inputValue;
+                }
+
+                input.value = "";
+                firstnumber = "";
+            }
+        });
+
+    </script>
+</body>
+</html>
+
