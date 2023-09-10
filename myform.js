@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const myForm = document.getElementById("myForm");
+
+  const myForm = document.getElementById("form");
 
   const nameee = document.getElementById("name");
   const employeeID = document.getElementById("employeeID"); 
   const department = document.getElementById("department");
   const exp = document.getElementById("exp"); 
   const email = document.getElementById("email");
-  const mlb = document.getElementById("mbl"); 
+  const mbl = document.getElementById("mbl"); 
   const tbody = document.querySelector("tbody");
 
   let AllTask = [];
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
       department: department.value,
       exp: parseFloat(exp.value),
       email: email.value,
-      number: mlb.value, 
+      number: mbl.value, 
     };
 
   
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const td5 = document.createElement("td");
       const td6 = document.createElement("td");
       const td7 = document.createElement("td");
-
+     console.log(ele.input)
       td1.innerText = ele.name;
       td2.innerText = ele.employeeID;
       td3.innerText = ele.department;
@@ -58,4 +58,3 @@ document.addEventListener("DOMContentLoaded", function () {
       tbody.append(tr);
     });
   });
-});
