@@ -35,7 +35,7 @@
 
     AllTask.push(data);
 
-    tbody.innerHTML = "";
+    tbody.innerHTML ="";
     AllTask.map((ele) => {
       const tr = document.createElement("tr");
       const td1 = document.createElement("td");
@@ -55,6 +55,6 @@
       td7.innerText = ele.role;
 
       tr.append(td1, td2, td3, td4, td5, td6, td7);
-      tbody.append(tr);
+    tbody.append(tr);
     });
   });
