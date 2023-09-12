@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function bankaccount(accountno,name,type,balance){
+        this.accountno = accountno
+        this.name=name
+        this.type = type 
+        this.balance = balance
+        this.deposit = function(amount){
+            this.balance+=amount
+        }
+        this.withdraw = function(amount){
+            if (amount <= this.balance) {
+                this.balance -= amount;
+            } else {
+                console.log("Insufficient funds");
+            }
+        }
+        this.checkbalance = function(){
+            console.log(this.balance)
+        }
+        this.isactive = function(){
+            if(this.type === "active"){
+                return "active"
+            }
+            else{
+                return "inactive"
+            }
+        }
+    }
+    function getTotalBalance(accounts) {
+        let totalBalance = 0;
+        for (let i = 0; i < accounts.length; i++) {
+            if (accounts[i].isactive() === "active") {
+                totalBalance += accounts[i].balance;
+            }
+        }
+        return totalBalance;
+    }
+    let p1 = new bankaccount("123456","sejal","active",12345)
+    let p2 = new bankaccount("123455","seja","active",1234)
+    let p3 = new bankaccount("122456","sjal","inactive",2345)
+    let p4 = new bankaccount("13456","ejal","active",1234500)
+    p1.deposit(234)
+    
+    p1.withdraw(500)
+    p2.deposit(234)
+    p1.checkbalance()
+    p2.withdraw(500)
+    p3.deposit(234)
+    p3.withdraw(456)
+    p2.checkbalance()
+    p4.deposit(234)
+    p3.checkbalance()
+    p4.withdraw(500)
+    p4.checkbalance()
+let accounts = [p1,p2,p3,p4]
+let totalActiveBalance = getTotalBalance(accounts);
+console.log(totalActiveBalance)
+</script>
+</html>
