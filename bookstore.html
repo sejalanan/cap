@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Bookstore</title>
+</head>
+<body>
+    <h1>Online Bookstore</h1>
+    <div id="bookstore"></div>
+
+    <script>
+        // Author constructor function
+        function Author(name, birthYear, nationality) {
+            this.name = name;
+            this.birthYear = birthYear;
+            this.nationality = nationality;
+        }
+
+        // Book constructor function
+        function Book(title, author, genre, price) {
+            this.title = title;
+            this.author = author; // Author object
+            this.genre = genre;
+            this.price = price;
+        }
+
+        // Method to get book information (added to Book prototype)
+        Book.prototype.getBookInfo = function () {
+            return `Title: ${this.title}<br>Author: ${this.author.name}<br>Genre: ${this.genre}<br>Price: $${this.price.toFixed(2)}`;
+        };
+
+        // Create instances of Author and Book
+        const author1 = new Author("J.K. Rowling", 1965, "British");
+        const author2 = new Author("George Orwell", 1903, "British");
+
+        const book1 = new Book("Harry Potter and the Sorcerer's Stone", author1, "Fantasy", 19.99);
+        const book2 = new Book("1984", author2, "Dystopian", 12.99);
+
+        // Online bookstore
+        const bookstore = [book1, book2];
+
+        // Function to display book details in the DOM
+        function displayBooks() {
+            const bookstoreDiv = document.getElementById("bookstore");
+
+            bookstore.forEach((book, index) => {
+                const bookDiv = document.createElement("div");
+                bookDiv.innerHTML = `<h2>Book ${index + 1} Details:</h2>${book.getBookInfo()}`;
+                bookstoreDiv.appendChild(bookDiv);
+            });
+        }
+
+        // Call the displayBooks function to populate the bookstore in the DOM
+        displayBooks();
+    </script>
+</body>
+</html>
