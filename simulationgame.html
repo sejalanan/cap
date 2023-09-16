@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    //  Create a basic Vehicle constructor function that initializes properties like brand, model, speed, and fuelType.
+    function vehicle(brand, model, speed, fueltype) {
+      this.brand = brand;
+      this.model = model;
+      this.speed = speed;
+      this.fueltype = fueltype;
+    }
+    //   Using the prototype, add common methods to the Vehicle object like accelerate(), brake(), and refuel().
+    vehicle.prototype.accelerate = function () {
+      console.log("speed of car increase");
+    };
+    vehicle.prototype.brake = function () {
+      console.log("stop the car");
+    };
+    vehicle.prototype.refuel = function () {
+      console.log("go to fuel station");
+    };
+    let vehicle1 = new vehicle("suv", 567, "50kmph", "petrol");
+    console.log(vehicle1);
+    // Now, create a Car constructor function. The Car function should inherit properties and methods from the Vehicle object. Additionally, Car should have an extra property numberOfWheels and a method honk() that logs a honking sound.
+    function car(brand, model, speed, fueltype, numberofwheels) {
+      vehicle.call(this, brand, model, speed, fueltype);
+      this.numberofwheels = numberofwheels;
+      this.honk = function () {
+        console.log("blow horn");
+      };
+    }
+    car.prototype = Object.create(vehicle.prototype);
+    let car1 = new car("suv", 657, "57kmph", "petrol", 4);
+    console.log(car1);
+    // Similarly, create an Airplane constructor function that inherits from Vehicle. It should have properties numberOfEngines and hasLandingGear and a method takeOff() that logs a message indicating the airplane is taking off.
+    function airplane(
+      brand,
+      model,
+      speed,
+      fueltype,
+      numberOfEngines,
+      hasLandingGear
+    ) {
+      vehicle.call(this, brand, model, speed, fueltype);
+      this.numberOfEngines = numberOfEngines;
+      this.hasLandingGear = hasLandingGear;
+      this.takingoff = function () {
+        console.log("plane is taking off");
+      };
+    }
+    airplane.prototype = Object.create(vehicle.prototype);
+    let airplane1 = new airplane("suv", 657, "57kmph", "petrol", 4, "yes");
+    console.log(airplane1);
+    car1.honk();
+    car1.accelerate();
+    car1.brake();
+    car1.refuel();
+    airplane1.refuel();
+    airplane1.accelerate();
+    airplane1.brake();
+    airplane1.takingoff();
+  </script>
+</html>

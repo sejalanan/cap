@@ -1,0 +1,80 @@
+<!-- Implement an inheritance model for four wheeler automobiles.
+Implement using both object.create() and constructor functions().
+Think of properties of what can be inherited. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+
+// const automobilePrototype = {
+//   startEngine() {
+//     console.log("Engine starting...");
+//   },
+//   stopEngine() {
+//     console.log("Engine stopping...");
+//   },
+// };
+
+
+// const fourWheelerPrototype = Object.create(automobilePrototype, {
+//   drive: {
+//     value: function () {
+//       console.log("Four-wheeler is driving...");
+//     },
+//   },
+//   honk: {
+//     value: function () {
+//       console.log("HONK! HONK!");
+//     },
+//   },
+// });
+
+
+// const myFourWheeler = Object.create(fourWheelerPrototype);
+
+// console.log(myFourWheeler)
+// myFourWheeler.startEngine();
+// myFourWheeler.drive();
+// myFourWheeler.honk();
+// myFourWheeler.stopEngine();
+    // **another approach with constructor function**
+  
+  
+function Automobile() {}
+
+Automobile.prototype.startEngine = function () {
+  console.log("Engine starting...");
+};
+
+Automobile.prototype.stopEngine = function () {
+  console.log("Engine stopping...");
+};
+
+
+function FourWheeler() {}
+
+FourWheeler.prototype = Object.create(Automobile.prototype);
+
+FourWheeler.prototype.drive = function () {
+  console.log("Four-wheeler is driving...");
+};
+
+FourWheeler.prototype.honk = function () {
+  console.log("HONK! HONK!");
+};
+
+
+const myFourWheeler = new FourWheeler();
+
+myFourWheeler.startEngine();
+myFourWheeler.drive();
+myFourWheeler.honk();
+myFourWheeler.stopEngine();
+
+</script>
