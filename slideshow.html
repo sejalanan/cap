@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Slide Show</title>
+  <style>
+    .slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px; 
+  margin: auto;
+}
+
+.slides {
+  display: none;
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  display: block;
+  margin: 10px auto;
+}
+
+.prev, .next {
+  background-color: #f1f1f1;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.prev:hover, .next:hover {
+  background-color: #ddd;
+}
+
+  </style>
+</head>
+<body>
+  <div class="slideshow-container">
+    <div class="slides fade">
+      <img src="https://static.tnn.in/thumb/msid-103748800,thumbsize-79376,width-800,height-450,resizemode-75/103748800.jpg" alt="Image 1">
+    </div>
+    <div class="slides fade">
+      <img src="https://static.tnn.in/thumb/msid-103748800,thumbsize-79376,width-800,height-450,resizemode-75/103748800.jpg" alt="Image 2">
+    </div>
+    <div class="slides fade">
+        <img src="https://static.tnn.in/photo/msid-103748671/103748671.jpg" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://static.tnn.in/photo/msid-103748693/103748693.jpg" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://static.tnn.in/photo/msid-103748715/103748715.jpg" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://static.tnn.in/photo/msid-103748727/103748727.jpg" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://static.tnn.in/photo/msid-103748735/103748735.jpg" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1536782376847-5c9d14d97cc0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1538991383142-36c4edeaffde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1506038634487-60a69ae4b7b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1501183007986-d0d080b147f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1430990480609-2bf7c02a6b1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+      <div class="slides fade">
+        <img src="https://images.unsplash.com/photo-1496692052106-d37cb66ab80c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZyZWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60" alt="Image 2">
+      </div>
+
+    <button id="startStopBtn" onclick="startStop()">Start / Stop</button>
+    <button class="prev" onclick="prevSlide()">Previous</button>
+    <button class="next" onclick="nextSlide()">Next</button>
+  </div>
+
+ <script> let slideIndex = 0;
+  let slides;
+  
+  function startStop() {
+    if (slides === undefined) {
+      slides = document.getElementsByClassName('slides');
+    }
+    
+    if (slides.length === 0) return;
+    
+    if (slideIndex === slides.length) {
+      slideIndex = 0;
+    }
+  
+    const slide = slides[slideIndex];
+    const slideStyle = slide.style;
+  
+    if (slideStyle.display === 'none') {
+      slideStyle.display = 'block';
+    } else {
+      slideStyle.display = 'none';
+    }
+  
+    slideIndex++;
+  }
+  
+  function showSlide(n) {
+    if (slides === undefined) {
+      slides = document.getElementsByClassName('slides');
+    }
+    
+    if (slides.length === 0) return;
+  
+    if (n >= slides.length) {
+      slideIndex = 0;
+    } else if (n < 0) {
+      slideIndex = slides.length - 1;
+    } else {
+      slideIndex = n;
+    }
+  
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+  
+    slides[slideIndex].style.display = 'block';
+  }
+  
+  function nextSlide() {
+    showSlide(slideIndex + 1);
+  }
+  
+  function prevSlide() {
+    showSlide(slideIndex - 1);
+  }
+</script>
+</body>
+</html>
