@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="hours">Hours:</label>
+<input type="number" id="hours" min="0">
+<label for="minutes">Minutes:</label>
+<input type="number" id="minutes" min="0">
+<label for="sec">Seconds:</label>
+<input type="number" id="sec" min="0">
+    </div>
+    <button id="startb" onclick="start()">Start</button>
+    <button id="stopb" onclick="stop()">Stop</button>
+    <button id="resetb" onclick="reset()">Reset</button>
+    <div id="timerDisplay">
+        <span id="timer">00:00:00</span>
+      </div>
+      <script>
+        let timer 
+        let ispaused = false
+        let totalseconds= 0
+        function start(){
+            if(ispaused){
+                ispaused = false
+            }
+            else{
+                const hours = parseInt(document.getElementById('hours').value) || 0;
+    const minutes = parseInt(document.getElementById('minutes').value) || 0;
+    const seconds = parseInt(document.getElementById('sec').value) || 0;
+    totalseconds = hours*3600 + minutes*60 +seconds
+            }
+            timer = setInterval(function () {
+    if (!ispaused && totalseconds > 0) {
+      totalseconds--;
+      displayTimer(totalseconds);
+    }
+  }, 1000);
+        }
+        
+  function stop() {
+  ispaused = true;
+}
+function reset() {
+  clearInterval(timer);
+  ispaused = false;
+  totalseconds = 0;
+  displayTimer(totalseconds);
+}
+function displayTimer(totalseconds) {
+  const hours = Math.floor(totalseconds / 3600);
+  const minutes = Math.floor((totalseconds % 3600) / 60);
+  const seconds = totalseconds % 60;
+
+  const timerDisplay = document.getElementById('timer');
+  timerDisplay.textContent = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+}
+function padZero(num) {
+  return num.toString().padStart(2, '0');
+}
+
+      </script>
+</body>
+</html>
