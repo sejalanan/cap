@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .menu {
+            margin-top: 20px;
+        }
+        .food-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .food-item label {
+            margin-left: 10px;
+        }
+        .order-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #d91e18;
+            color: #ffffff;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .order-btn:hover {
+            background-color: #c41210;
+        }
+        .order-completed {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #dff0d8;
+            padding: 20px;
+            border: 1px solid #d6e9c6;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>McDonald’s Virtual Order System</h1>
+        
+        <div class="menu">
+            <h2>Menu</h2>
+            <div class="food-item">
+                <img height="70%" width="70%" src="https://c4.wallpaperflare.com/wallpaper/894/492/7/mcdonalds-burger-hd-wallpaper-preview.jpg" alt="Burger" class="food-image">
+                <input type="checkbox" id="burger" name="burger">
+                <label for="burger">Burger</label>
+            </div>
+            
+            <div class="food-item">
+                <img height="70%" width="70%" src="https://www.wired.com/wp-content/uploads/2014/06/qq_whatsinside_fries_f.jpg" alt="Fries" class="food-image">
+                <input type="checkbox" id="fries" name="fries">
+                <label for="fries">Fries</label>
+            </div>
+            <div class="food-item">
+                <img height="70%" width="70%"src="https://www.rd.com/wp-content/uploads/2020/10/mcdonalds-coke-collage.jpg?fit=700%2C1024" alt="Coke" class="food-image">
+                
+                <input type="checkbox" id="coke" name="coke">
+                <label for="coke">Coke</label>
+            </div>
+            <div class="food-item">
+    <img height="70%" width="70%" src="https://lh3.googleusercontent.com/EanEPfp5hin0bZCKrTM4joZ5wHZkmNT6KNJ6yRzeYCLrtwmPr6lCzV1oHuGl6-5z7jbKznn_xqQBurhz0E8Swncmw2tI1vQrPbUWFcL3bA=w512-rw" alt="Maharaja meal" class="food-image">
+    
+    <input type="checkbox" id="maharaja" name="maharaja">
+    <label for="maharaja">Maharaja meal</label>
+</div>
+            
+            <button class="order-btn">Order Food</button>
+        </div>
+        <div class="order-completed hidden">
+            <h2>Order Completed!</h2>
+            <p>Your order number is: <span id="order-number">12345</span></p>
+        </div>
+    </div>
+</body>
+</html>
+
+    <script>
+    let button = document.querySelector(".order-btn");
+    button.addEventListener('click', function(e) {
+        let randomTime = (Math.random() * 1000) + 100;
+        let orderNo = Math.floor((Math.random() * 90000) + 10000); 
+
+        let orderNumberElement = document.getElementById("order-number");
+        orderNumberElement.textContent = orderNo;
+
+        setTimeout(function() {
+            let orderCompletedDiv = document.querySelector(".order-completed");
+            orderCompletedDiv.classList.remove("hidden");
+// document.getElementsByClassName("order-completed hidden").style.display = 'block'
+        }, randomTime);
+    });
+</script>
+
