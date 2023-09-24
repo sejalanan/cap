@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="name" placeholder="Name">
+    <input type="number" placeholder="Age" id="age">
+    <button id="button" onclick="store()">Submit</button>
+
+    <table>
+        <thead>
+            <th>NAME</th>
+            <th>AGE</th>
+        </thead>
+        <tbody id="tablebody">
+        </tbody>
+    </table>
+
+    <script>
+        let name = document.getElementById("name");
+        let age = document.getElementById("age");
+        let table = document.getElementById("tablebody");
+
+        function store() {
+            let enteredName = name.value;
+            let enteredAge = age.value;
+
+            let newRow = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+
+            td1.textContent = enteredName;
+            td2.textContent = enteredAge;
+
+            newRow.appendChild(td1);
+            newRow.appendChild(td2);
+
+            table.appendChild(newRow);
+
+           
+            localStorage.setItem('name', enteredName);
+            localStorage.setItem('age', enteredAge);
+
+            
+            name.value = "";
+            age.value = "";
+        }
+    </script>
+</body>
+</html>
