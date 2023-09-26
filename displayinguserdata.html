@@ -42,9 +42,9 @@ font-size: 25px;
 
 let data = [];
 
-// get the data
+
 function fetchusers(){
-fetch("https://reqres.in/api/users") //fetch is a promise and promises takes time
+fetch("https://reqres.in/api/users") 
   .then(function (res) {
     return res.json();
   })
