@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todos</title>
+    <style>
+        
+        table {
+            width: 80%; 
+            border-collapse: collapse;
+            margin: 0 auto; 
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4174bb; 
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+
+   <script>
+    let table = document.getElementById("tbody")
+
+    fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(function (res){
+        return res.json();
+    })
+    .then(function(todos){
+        displayelement(todos);
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+    function displayelement(data){
+        data.forEach(function(todo){
+            let tr = document.createElement("tr");
+
+            let td1 = document.createElement("td");
+            td1.textContent = todo.id;
+
+            let td2 = document.createElement("td");
+            td2.textContent = todo.title;
+
+            let td3 = document.createElement("td");
+            td3.textContent = todo.completed;
+
+            tr.append(td1, td2, td3);
+            table.appendChild(tr); 
+        });
+    }
+   </script>
+</body>
+</html>
