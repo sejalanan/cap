@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moviedetails</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #292b2c;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #container {
+            background-color: #373a3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Details</h1>
+    <div id="container"></div>
+    <script>
+        let container = document.getElementById("container")
+        let open_id = 'e7f46480'
+        let imdbID = localStorage.getItem("imdbID")
+        fetch("https://www.omdbapi.com/?apikey=" +open_id + "&i=" + imdbID)
+        .then(function(res){
+            return res.json()
+        })
+        .then(function(moviedetails){
+            // movie = parse.moviedetails
+            // container.append(movie)
+            let movieDetailsString = JSON.stringify(moviedetails,null ,2);
+            container.innerHTML = `<pre>${movieDetailsString}</pre>`;
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    </script>
+</body>
+</html>

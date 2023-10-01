@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #input {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+        #root {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #root div {
+            padding: 20px;
+            margin: 10px;
+            border: 2px solid white;
+            text-align: center;
+        }
+
+        #root img {
+            max-width: 100px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="Search for a movie" id="input">
+    <button onclick="searchForMovie()">Search</button>
+    <div id="root"></div>
+
+    <script>
+        function searchForMovie() {
+            const searchInput = document.getElementById("input").value;
+            const apiKey = 'e7f46480'; 
+            const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchInput}`;
+
+            fetch(apiUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (movieList) {
+                    let movies = movieList.Search;
+                    displayData(movies);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function displayData(data) {
+            const rootElement = document.getElementById("root");
+            rootElement.innerHTML = '';  
+
+            data.forEach(function (movie) {
+                let movieCard = document.createElement("div");
+
+                let movieImage = document.createElement("img");
+                movieImage.src = movie.Poster;
+
+                let movieName = document.createElement("p");
+                movieName.textContent = movie.Title;
+
+                let goToDetails = document.createElement("button");
+                goToDetails.textContent = "Go to Details";
+                goToDetails.onclick = function () {
+                    localStorage.setItem('imdbID', movie.imdbID);
+                    location.href = 'moviedetails.html';
+                };
+
+                movieCard.append(movieImage, movieName, goToDetails);
+                rootElement.appendChild(movieCard);
+            });
+        }
+    </script>
+</body>
+</html>
