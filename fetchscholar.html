@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #searchContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #searchContainer input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #searchContainer button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    #sortContainer {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #sortContainer select {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #sortContainer button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    #container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .productCard {
+      border: 1px solid #cecece;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .productCard img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .productCard p {
+      margin: 10px 0;
+    }
+  </style>
+  <title>E Commerce</title>
+</head>
+<body>
+  <h1>E Commerce</h1>
+
+  <div id="searchContainer">
+    <input type="text" placeholder="Search for product" id="input" />
+    <button onclick="search()">Search</button>
+  </div>
+
+  <div id="sortContainer">
+    <select id="sort">
+      <option value="jewelery">Jewelry</option>
+      <option value="electronics">Electronics</option>
+      <option value="men's clothing">Men's Clothing</option>
+      <option value="women's clothing">Women's Clothing</option>
+    </select>
+    <button onclick="sortProducts()">Sort</button>
+  </div>
+
+  <div id="container"></div>
+
+  <script>
+    const container = document.getElementById("container");
+    const sortSelect = document.getElementById("sort");
+    const inputElement = document.getElementById("input");
+    let productsData = []; // Store all products for searching
+
+    fetch("https://fakestoreapi.com/products")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (products) {
+        productsData = products;
+        displayData(productsData);
+      })
+      .catch(function (error) {
+        console.error("Error fetching products:", error);
+      });
+
+    function search() {
+      const searchTerm = inputElement.value.toLowerCase();
+
+      const filteredProducts = productsData.filter(function (product) {
+        return product.title.toLowerCase().includes(searchTerm);
+      });
+
+      displayData(filteredProducts);
+    }
+
+    function sortProducts() {
+      const sortValue = sortSelect.value;
+      const apiUrl = `https://fakestoreapi.com/products/category/${sortValue}`;
+
+      fetch(apiUrl)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (products) {
+          displayData(products);
+        })
+        .catch(function (error) {
+          console.error("Error fetching products:", error);
+        });
+    }
+
+    function displayData(data) {
+      container.innerHTML = "";
+
+      data.forEach(function (product) {
+        let div = document.createElement("div");
+        div.classList.add("productCard");
+
+        let productImg = document.createElement("img");
+        productImg.src = product.image;
+        productImg.alt = product.title;
+
+        let title = document.createElement("p");
+        title.innerText = product.title;
+
+        let price = document.createElement("p");
+        price.innerText = "INR: " + product.price;
+
+        div.appendChild(productImg);
+        div.appendChild(title);
+        div.appendChild(price);
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
