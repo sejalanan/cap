@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="cityinput" placeholder="Enter city" />
+      <button onclick="fetchweather()">Search</button>
+
+      <div class="left">
+        <div id="weatherdetail">
+          <img src="" alt="weather icon" id="weatherIcon" /> 
+          <p>Min Temp : <span id="minTemp"></span></p>
+          <p>Max Temp : <span id="maxTemp"></span></p>
+          <p>Wind : <span id="wind"></span></p>
+          <p>Clouds : <span id="clouds"></span></p>
+          <p>Sunrise : <span id="sunrise"></span></p>
+          <p>Sunset : <span id="sunset"></span></p>
+        </div>
+      </div>
+      <div class="right">
+        <iframe src="" frameborder="0" id="googleMap"></iframe>
+      </div>
+    </div>
+    <script>
+      async function fetchweather() {
+        try {
+          let apiKey = "3fbdada68c91902f2a6629b869939c5b";  
+          let city = document.getElementById("cityinput").value;  
+          let res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+          let data = await res.json();
+
+          // Update weather details
+          let iconId = data.weather[0].icon;
+          let iconUrl = `http://openweathermap.org/img/wn/${iconId}.png`;
+          document.getElementById("weatherIcon").src = iconUrl;
+          document.getElementById("minTemp").innerText = data.main.temp_min;
+          document.getElementById("maxTemp").innerText = data.main.temp_max;
+          document.getElementById("wind").innerText = data.wind.speed;
+          document.getElementById("clouds").innerText = data.clouds.all;
+          document.getElementById("sunrise").innerText = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+          document.getElementById("sunset").innerText = new Date(data.sys.sunset * 1000).toLocaleTimeString();
+
+          // Update the Google map iframe src
+          const googleMapUrl = `https://www.openstreetmap.org/export/embed.html?layer=mapnik&marker=${data.coord.lat},${data.coord.lon}`;
+          document.getElementById("googleMap").src = googleMapUrl;
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      }
+    </script>
+  </body>
+</html>

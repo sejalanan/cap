@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .search-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .search-container input {
+      padding: 10px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .search-container button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .search-container button:hover {
+      background-color: #45a049;
+    }
+
+    .weather-details {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Weather App</h1>
+
+    <div class="search-container">
+      <input type="text" id="cityInput" placeholder="Enter a city name">
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="weather-details" id="weather-details">
+      
+    </div>
+
+    <div id="map"></div>
+  </div>
+
+  <script>
+    function getWeather() {
+      const city = document.getElementById('cityInput').value;
+      const weatherDetailsElement = document.getElementById('weather-details');
+      const mapElement = document.getElementById('map');
+
+      
+      const apiKey = '3fbdada68c91902f2a6629b869939c5b';
+      const apiUrl = (`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          displayWeather(data, weatherDetailsElement);
+          displayMap(data.coord, mapElement);
+        })
+        .catch(error => console.error('Error fetching weather data:', error));
+    }
+
+    function displayWeather(weatherData, weatherDetailsElement) {
+      weatherDetailsElement.innerHTML = `
+        <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+        <p>Temperature: ${weatherData.main.temp}°C</p>
+        <p>Min Temperature: ${weatherData.main.temp_min}°C</p>
+        <p>Max Temperature: ${weatherData.main.temp_max}°C</p>
+        <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+        <p>Clouds: ${weatherData.clouds.all}%</p>
+        <p>Sunrise: ${new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</p>
+        <p>Sunset: ${new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</p>
+      `;
+    }
+
+    function displayMap(coordinates, mapElement) {
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${coordinates.lat},${coordinates.lon}`;
+      mapElement.innerHTML = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapUrl}" allowfullscreen></iframe>`;
+    }
+  </script>
+</body>
+</html>
