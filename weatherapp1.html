@@ -109,6 +109,8 @@
           // Update the Google map iframe src
           const googleMapUrl = `https://www.openstreetmap.org/export/embed.html?layer=mapnik&marker=${data.coord.lat},${data.coord.lon}`;
           document.getElementById("googleMap").src = googleMapUrl;
+
+          forecast - await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}&units=metric`)
         } catch (error) {
           console.error("An error occurred:", error);
         }

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>Document</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
+    body {
+        font-family: 'Arial', sans-serif;
         background-color: #f4f4f4;
         margin: 0;
         padding: 0;
@@ -14,9 +14,9 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-      }
-
-      .container {
+    }
+    
+    .container {
         background-color: #fff;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
@@ -27,9 +27,9 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
-      }
-
-      input[type="text"] {
+    }
+    
+    input[type="text"] {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -38,14 +38,14 @@
         border-radius: 4px;
         font-size: 16px;
         transition: border-color 0.3s;
-      }
-
-      input[type="text"]:focus {
+    }
+    
+    input[type="text"]:focus {
         border-color: #007BFF;
         outline: none;
-      }
-
-      button {
+    }
+    
+    button {
         background-color: #007BFF;
         color: white;
         border: none;
@@ -58,87 +58,88 @@
         cursor: pointer;
         border-radius: 4px;
         transition: background-color 0.3s;
-      }
-
-      button:hover {
+    }
+    
+    button:hover {
         background-color: #0056b3;
-      }
-
-      .left,
-      .right {
+    }
+    
+    .left, .right {
         width: 100%;
         padding: 20px;
         box-sizing: border-box;
-      }
-
-      .left {
+    }
+    
+    .left {
         border-right: 1px solid #eee;
-      }
-
-      #weatherDetails {
+    }
+    
+    #weatherDetails {
         display: flex;
         flex-direction: column;
         align-items: center;
-      }
-
-      #weatherDetails img {
+    }
+    
+    #weatherDetails img {
         max-width: 100px;
         margin-bottom: 20px;
-      }
-
-      #weatherDetails p {
+    }
+    
+    #weatherDetails p {
         font-size: 18px;
         margin-bottom: 10px;
-      }
-
-      .right iframe {
+    }
+    
+    .right iframe {
         width: 100%;
         height: 400px;
         border: none;
-      }
-
-      @media (min-width: 768px) {
+    }
+    
+    @media (min-width: 768px) {
         .container {
-          flex-direction: row;
+            flex-direction: row;
         }
-
-        .left,
-        .right {
-          width: 50%;
+    
+        .left, .right {
+            width: 50%;
         }
-      }
-
-      /* Additional styles for forecast */
-      .forecast-container {
+    }
+    
+    
+    
+    
+    /* ... Existing styles ... */
+    
+    .forecast-container {
         margin-top: 40px;
         text-align: center;
-      }
-
-      .forecast-days {
+    }
+    
+    .forecast-days {
         display: flex;
         justify-content: space-around;
         margin-top: 20px;
-      }
-
-      .forecast-day {
+    }
+    
+    .forecast-day {
         background-color: #f4f4f4;
         padding: 20px;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         flex: 1;
         margin: 0 10px;
-        border-radius: 10px;
-      }
-
-      .forecast-day img {
+    }
+    
+    .forecast-icon img {
         max-width: 70px;
         display: block;
         margin: 0 auto 10px;
-      }
-
-      .forecast-date {
+    }
+    
+    .forecast-date {
         margin-bottom: 10px;
-      }
-    </style>
+    }
+</style> 
   </head>
   <body>
     <div class="container">
@@ -147,7 +148,7 @@
 
       <div class="left">
         <div id="weatherdetail">
-          <img src="" alt="weather icon" id="weatherIcon" />
+          <img src="" alt="weather icon" id="weatherIcon" /> 
           <p>Min Temp : <span id="minTemp"></span></p>
           <p>Max Temp : <span id="maxTemp"></span></p>
           <p>Wind : <span id="wind"></span></p>
@@ -161,17 +162,17 @@
       </div>
     </div>
     <div class="forecast-container">
-      <h2>5 Day Forecast</h2>
-      <div class="forecast-days" id="forecastDays"></div>
+        <h2>5 Day Forecast</h2>
+        <div class="forecast-days" id="forecastDays">
+      
+        </div>
     </div>
     <script>
       async function fetchweather() {
         try {
-          let apiKey = "3fbdada68c91902f2a6629b869939c5b";
-          let city = document.getElementById("cityinput").value;
-          let res = await fetch(
-            `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
-          );
+          let apiKey = "3fbdada68c91902f2a6629b869939c5b";  
+          let city = document.getElementById("cityinput").value;  
+          let res = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
           let data = await res.json();
 
           // Update weather details
@@ -182,59 +183,52 @@
           document.getElementById("maxTemp").innerText = data.main.temp_max;
           document.getElementById("wind").innerText = data.wind.speed;
           document.getElementById("clouds").innerText = data.clouds.all;
-          document.getElementById("sunrise").innerText = new Date(
-            data.sys.sunrise * 1000
-          ).toLocaleTimeString();
-          document.getElementById("sunset").innerText = new Date(
-            data.sys.sunset * 1000
-          ).toLocaleTimeString();
+          document.getElementById("sunrise").innerText = new Date(data.sys.sunrise * 1000).toLocaleTimeString();
+          document.getElementById("sunset").innerText = new Date(data.sys.sunset * 1000).toLocaleTimeString();
 
           // Update the Google map iframe src
           const googleMapUrl = `https://www.openstreetmap.org/export/embed.html?layer=mapnik&marker=${data.coord.lat},${data.coord.lon}`;
           document.getElementById("googleMap").src = googleMapUrl;
-
-          // Fetch and display forecast
-          getForecastData(city);
         } catch (error) {
           console.error("An error occurred:", error);
         }
       }
-
       async function getForecastData(city) {
-        try {
-          let APIkey = "3fbdada68c91902f2a6629b869939c5b";
-          let res = await fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}&units=metric`
-          );
-          let data = await res.json();
-          const forecastEls = document.getElementById("forecastDays");
-          forecastEls.innerHTML = ""; // Clear existing forecasts
+  try {
+    let APIkey = "3fbdada68c91902f2a6629b869939c5b";
+    let res = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIkey}&units=metric`
+    );
+    let data = await res.json();
+    console.log(data);
+    const forecastEls = document.getElementById("forecastDays");
+    forecastEls.innerHTML = ""; // Clear existing forecasts
 
-          // Filter the data to get one forecast per day
-          const dailyData = data.list.filter((item, index) => index % 8 === 0);
+    // Filter the data to get one forecast per day
+    const dailyData = data.list.filter((item, index) => index % 8 === 0);
 
-          dailyData.forEach((day, idx) => {
-            if (idx < 5) {
-              // Only take 5 days
-              const temp = day.main.temp;
-              const icon = day.weather[0].icon;
-              const date = new Date(day.dt_txt).toLocaleDateString();
+    dailyData.forEach((day, idx) => {
+      if (idx < 5) {
+        // Only take 5 days
+        const temp = day.main.temp;
+        const icon = day.weather[0].icon;
+        const date = new Date(day.dt_txt).toLocaleDateString();
 
-              forecastEls.innerHTML += `
-                <div class="forecast-day">
-                    <div class="forecast-date">${date}</div>
-                    <div class="forecast-icon">
-                        <img src="http://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+        forecastEls.innerHTML += `
+                    <div class="forecast-day">
+                        <div class="forecast-date">${date}</div>
+                        <div class="forecast-icon">
+                            <img src="http://openweathermap.org/img/w/${icon}.png" alt="Weather Icon">
+                        </div>
+                        <div class="forecast-temp">${temp}°C</div>
                     </div>
-                    <div class="forecast-temp">${temp}°C</div>
-                </div>
-              `;
-            }
-          });
-        } catch (error) {
-          console.log(error);
-        }
+                `;
       }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
     </script>
   </body>
 </html>
