@@ -63,7 +63,14 @@
     <div id="root"></div>
 
     <script>
-       
+        let timeout;
+    document.getElementById('input').addEventListener('input',function(){
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+            searchForMovie(document.getElementById('input').value);
+            // console.log(document.getElementById('input').value);
+        },200);
+    })
 
 
         function searchForMovie() {
